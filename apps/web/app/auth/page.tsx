@@ -30,7 +30,7 @@ export default function AuthPage() {
           </div>
         </div>
         <p className="relative text-center text-xs text-muted-foreground md:text-start">
-          Protected by PIN, two-factor authentication and device management.
+          Protected by Xerixa
         </p>
       </div>
       <AuthArt />
