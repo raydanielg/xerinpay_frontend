@@ -98,7 +98,7 @@ export function LoginForm({
               name="email"
               type="email"
               autoComplete="email"
-              placeholder="you@business.com"
+              placeholder="Enter your email address"
               required
             />
           </InputGroup>
@@ -122,6 +122,7 @@ export function LoginForm({
               name="password"
               type="password"
               autoComplete="current-password"
+              placeholder="Enter your password"
               required
             />
           </InputGroup>
@@ -138,7 +139,7 @@ export function LoginForm({
                 name="otp"
                 inputMode="numeric"
                 autoComplete="one-time-code"
-                placeholder="6-digit code"
+                placeholder="••••••"
                 maxLength={6}
                 required
                 className="text-center tracking-[0.5em]"
