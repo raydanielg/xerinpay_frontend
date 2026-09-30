@@ -1,5 +1,4 @@
-import { HugeiconsIcon } from "@hugeicons/react"
-import { Wallet01Icon } from "@hugeicons/core-free-icons"
+import Image from "next/image"
 
 import { AuthArt } from "@/components/auth-art"
 import { LoginForm } from "@/components/login-form"
@@ -9,10 +8,15 @@ export default function AuthPage() {
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          <a href="/" className="flex items-center gap-2 font-medium">
-            <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <HugeiconsIcon icon={Wallet01Icon} strokeWidth={2} className="size-4" />
-            </div>
+          <a href="/" className="flex items-center gap-2 font-semibold text-lg">
+            <Image
+              src="/logo.png"
+              alt="XerinPay"
+              width={32}
+              height={32}
+              className="size-8 object-contain"
+              priority
+            />
             XerinPay
           </a>
         </div>

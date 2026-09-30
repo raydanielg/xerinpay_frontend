@@ -1,6 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import {
+  CreditCardIcon,
+  ShieldCheckIcon,
+  ChartBarLineIcon,
+} from "@hugeicons/core-free-icons"
 
 const IMAGES = [
   "/auth/pay-phone.jpg",
@@ -26,6 +32,12 @@ const IMAGES = [
   "/auth/card-phone-2.jpg",
 ]
 
+const FEATURES = [
+  { icon: CreditCardIcon, label: "Checkout & payments" },
+  { icon: ShieldCheckIcon, label: "PIN, 2FA & device control" },
+  { icon: ChartBarLineIcon, label: "Reports & settlements" },
+]
+
 /** Rotating financial artwork for the auth column - subtle crossfade. */
 export function AuthArt() {
   const [index, setIndex] = useState(0)
@@ -48,13 +60,24 @@ export function AuthArt() {
           style={{ opacity: i === index ? 1 : 0 }}
         />
       ))}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-8">
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-8">
         <p className="text-lg font-medium text-white">
           Payments, business and reporting in one place.
         </p>
         <p className="mt-1 text-sm text-white/70">
           XerinPay runs your checkout, orders, bookings and settlements.
         </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {FEATURES.map(({ icon, label }) => (
+            <span
+              key={label}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm"
+            >
+              <HugeiconsIcon icon={icon} strokeWidth={2} className="size-3.5" />
+              {label}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   )
