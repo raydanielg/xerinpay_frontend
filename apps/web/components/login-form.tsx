@@ -12,8 +12,18 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@workspace/ui/components/field"
-import { Input } from "@workspace/ui/components/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@workspace/ui/components/input-group"
 import { Spinner } from "@workspace/ui/components/spinner"
+import { HugeiconsIcon } from "@hugeicons/react"
+import {
+  Mail01Icon,
+  SquareLock02Icon,
+  ShieldKeyIcon,
+} from "@hugeicons/core-free-icons"
 import { api, ApiError } from "@/lib/api"
 
 const FRIENDLY: Record<string, string> = {
@@ -79,15 +89,19 @@ export function LoginForm({
         </div>
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="you@business.com"
-            required
-            className="h-11 px-3 text-sm"
-          />
+          <InputGroup className="h-11">
+            <InputGroupAddon align="inline-start">
+              <HugeiconsIcon icon={Mail01Icon} strokeWidth={2} />
+            </InputGroupAddon>
+            <InputGroupInput
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="you@business.com"
+              required
+            />
+          </InputGroup>
         </Field>
         <Field>
           <div className="flex items-center">
@@ -99,28 +113,37 @@ export function LoginForm({
               Forgot your password?
             </a>
           </div>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            className="h-11 px-3 text-sm"
-          />
+          <InputGroup className="h-11">
+            <InputGroupAddon align="inline-start">
+              <HugeiconsIcon icon={SquareLock02Icon} strokeWidth={2} />
+            </InputGroupAddon>
+            <InputGroupInput
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+            />
+          </InputGroup>
         </Field>
         {otpStep && (
           <Field>
             <FieldLabel htmlFor="otp">Two-factor code</FieldLabel>
-            <Input
-              id="otp"
-              name="otp"
-              inputMode="numeric"
-              autoComplete="one-time-code"
-              placeholder="6-digit code"
-              maxLength={6}
-              required
-              className="h-11 px-3 text-center text-base tracking-[0.5em]"
-            />
+            <InputGroup className="h-11">
+              <InputGroupAddon align="inline-start">
+                <HugeiconsIcon icon={ShieldKeyIcon} strokeWidth={2} />
+              </InputGroupAddon>
+              <InputGroupInput
+                id="otp"
+                name="otp"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                placeholder="6-digit code"
+                maxLength={6}
+                required
+                className="text-center tracking-[0.5em]"
+              />
+            </InputGroup>
           </Field>
         )}
         {error && <FieldError>{error}</FieldError>}
