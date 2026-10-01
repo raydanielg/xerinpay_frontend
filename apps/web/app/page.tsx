@@ -38,7 +38,7 @@ function FloatingCards() {
           className="h-32 w-full object-cover"
         />
         <div className="bg-white px-3 py-2">
-          <p className="text-[11px] font-medium text-neutral-700">
+          <p className="text-[11px] font-semibold text-black">
             Checkout link opened
           </p>
         </div>
@@ -46,11 +46,11 @@ function FloatingCards() {
 
       {/* hours saved stat with sparkline */}
       <div className={`${cardBase} mb-14 w-44 rotate-[-3deg]`}>
-        <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-500">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-neutral-800">
           Hours saved
         </p>
-        <p className="mt-1 text-2xl font-bold text-neutral-900">
-          6.4 <span className="text-sm font-medium text-neutral-400">hrs/wk</span>
+        <p className="mt-1 text-2xl font-bold text-black">
+          6.4 <span className="text-sm font-medium text-neutral-600">hrs/wk</span>
         </p>
         <svg viewBox="0 0 120 32" className="mt-2 h-8 w-full">
           <polyline
@@ -86,7 +86,7 @@ function FloatingCards() {
 
       {/* settlement checklist */}
       <div className={`${cardBase} mb-20 w-52 rotate-[6deg]`}>
-        <p className="text-[11px] font-semibold text-neutral-900">
+        <p className="text-xs font-bold text-black">
           Today&apos;s settlements
         </p>
         <ul className="mt-2 space-y-1.5">
@@ -98,7 +98,7 @@ function FloatingCards() {
           ].map((l) => (
             <li
               key={l}
-              className="flex items-center gap-2 text-[11px] text-neutral-600"
+              className="flex items-center gap-2 text-[11px] font-medium text-black"
             >
               <HugeiconsIcon
                 icon={CheckmarkCircle02Icon}
@@ -109,7 +109,7 @@ function FloatingCards() {
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-[10px] text-neutral-400">12 payouts sent</p>
+        <p className="mt-2 text-[10px] font-medium text-neutral-700">12 payouts sent</p>
       </div>
 
       {/* photo card 2 */}
@@ -121,7 +121,7 @@ function FloatingCards() {
           className="h-32 w-full object-cover"
         />
         <div className="bg-white px-3 py-2">
-          <p className="text-[11px] font-medium text-neutral-700">
+          <p className="text-[11px] font-semibold text-black">
             Tap-to-pay received
           </p>
         </div>
