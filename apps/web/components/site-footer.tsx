@@ -26,11 +26,11 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Product",
     links: [
-      { label: "Payments", href: "/" },
-      { label: "Checkout links", href: "/" },
-      { label: "Orders & bookings", href: "/" },
-      { label: "Reports", href: "/" },
-      { label: "Mobile app", href: "/" },
+      { label: "Payments", href: "/product" },
+      { label: "Checkout links", href: "/product" },
+      { label: "Orders & bookings", href: "/product" },
+      { label: "Reports", href: "/product" },
+      { label: "Mobile app", href: "/product" },
     ],
   },
   {
@@ -45,9 +45,9 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Developers",
     links: [
-      { label: "Documentation", href: "/" },
-      { label: "API reference", href: "/" },
-      { label: "Webhooks", href: "/" },
+      { label: "Documentation", href: "/developers" },
+      { label: "API reference", href: "/developers" },
+      { label: "Webhooks", href: "/developers" },
       { label: "Status", href: "/" },
     ],
   },

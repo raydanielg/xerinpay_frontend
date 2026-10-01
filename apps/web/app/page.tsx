@@ -176,10 +176,10 @@ export default function Page() {
           </div>
 
           <nav className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-widest text-white/80 md:flex">
-            {["Product", "Pricing", "Developers"].map((l) => (
+            {([["Product", "/product"], ["Pricing", "/pricing"], ["Developers", "/developers"]] as const).map(([l, href]) => (
               <Link
                 key={l}
-                href="/"
+                href={href}
                 className="relative py-1 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-lime-300 after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100"
               >
                 {l}
