@@ -64,9 +64,9 @@ function FloatingCards() {
       </div>
 
       {/* dark copy card */}
-      <div className={`${cardBase} mb-24 w-56 rotate-[4deg] bg-neutral-900`}>
-        <span className="mb-3 block size-1.5 rounded-full bg-emerald-400" />
-        <p className="text-sm font-medium leading-relaxed text-white">
+      <div className={`${cardBase} mb-24 w-56 rotate-[4deg]`}>
+        <span className="mb-3 block size-1.5 rounded-full bg-emerald-500" />
+        <p className="text-sm font-medium leading-relaxed text-black">
           Orders, bookings and invoices — settled into one balance.
         </p>
       </div>
