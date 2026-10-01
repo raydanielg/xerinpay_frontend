@@ -167,7 +167,8 @@ export function SiteFooter() {
           {/* link columns */}
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <p className="text-xs font-semibold uppercase tracking-widest text-white/50">
+              <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-widest text-white/50">
+                <span className="h-px w-4 bg-lime-300/70" />
                 {col.title}
               </p>
               <ul className="mt-4 space-y-2.5">
@@ -175,8 +176,13 @@ export function SiteFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-sm text-white/70 transition-colors hover:text-white"
+                      className="group inline-flex items-center gap-1.5 text-sm text-white/70 transition-colors hover:text-white"
                     >
+                      <HugeiconsIcon
+                        icon={ArrowRight01Icon}
+                        strokeWidth={2.5}
+                        className="size-3 text-white/30 transition-all group-hover:translate-x-0.5 group-hover:text-lime-300"
+                      />
                       {l.label}
                     </Link>
                   </li>
