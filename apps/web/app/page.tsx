@@ -11,6 +11,8 @@ import {
 
 import { Button } from "@workspace/ui/components/button"
 
+import { GatewaySection } from "@/components/gateway-section"
+
 const cardBase =
   "rounded-2xl bg-white p-4 shadow-2xl shadow-black/25 ring-1 ring-black/5"
 
@@ -230,6 +232,8 @@ export default function Page() {
 
         <FloatingCards />
       </section>
+
+      <GatewaySection />
     </main>
   )
 }
