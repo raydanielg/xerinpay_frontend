@@ -155,7 +155,7 @@ export default function Page() {
               alt="XerinPay"
               width={34}
               height={34}
-              className="size-9 rounded-lg bg-white object-contain p-0.5"
+              className="size-9 object-contain"
               priority
             />
             <span className="text-lg font-semibold tracking-tight text-white">
