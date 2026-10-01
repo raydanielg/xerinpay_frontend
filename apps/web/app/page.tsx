@@ -19,12 +19,12 @@ function FloatingCards() {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden items-end justify-center gap-5 px-8 lg:flex">
       {/* settled metric - dark */}
-      <div className={`${cardBase} mb-10 w-48 rotate-[-8deg] bg-neutral-900`}>
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-white/60">
+      <div className={`${cardBase} mb-10 w-48 rotate-[-8deg]`}>
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-800">
           Settled today
         </p>
-        <p className="mt-1.5 text-2xl font-bold text-white">TZS 4.2M</p>
-        <p className="mt-2.5 text-xs font-medium text-emerald-400">
+        <p className="mt-1.5 text-2xl font-bold text-black">TZS 4.2M</p>
+        <p className="mt-2.5 text-xs font-medium text-emerald-600">
           Airtel · M-Pesa · Tigo
         </p>
       </div>
