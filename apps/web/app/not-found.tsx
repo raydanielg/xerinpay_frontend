@@ -42,7 +42,8 @@ export default function NotFound() {
           <Button
             size="lg"
             className="h-11"
-            render={
+            nativeButton={false}
+              render={
               <Link href="/">
                 <HugeiconsIcon icon={Home01Icon} strokeWidth={2} />
                 Go home
@@ -53,7 +54,8 @@ export default function NotFound() {
             variant="outline"
             size="lg"
             className="h-11"
-            render={
+            nativeButton={false}
+              render={
               <Link href="/auth">
                 <HugeiconsIcon icon={ArrowLeft01Icon} strokeWidth={2} />
                 Back to sign in

@@ -94,7 +94,8 @@ export function RegisterForm({
         <Button
           size="lg"
           className="h-11"
-          render={<Link href="/auth">Continue to sign in</Link>}
+          nativeButton={false}
+              render={<Link href="/auth">Continue to sign in</Link>}
         />
       </div>
     )

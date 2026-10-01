@@ -74,7 +74,8 @@ export function ForgotPasswordForm({
           variant="outline"
           size="lg"
           className="h-11"
-          render={
+          nativeButton={false}
+              render={
             <Link href="/auth">
               <HugeiconsIcon icon={ArrowLeft01Icon} strokeWidth={2} />
               Back to sign in
