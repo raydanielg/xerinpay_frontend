@@ -167,8 +167,7 @@ export function SiteFooter() {
           {/* link columns */}
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-widest text-white/50">
-                <span className="h-px w-4 bg-lime-300/70" />
+              <p className="relative pb-2.5 text-xs font-semibold uppercase tracking-widest text-white/50 after:absolute after:bottom-0 after:left-0 after:h-px after:w-6 after:bg-lime-300">
                 {col.title}
               </p>
               <ul className="mt-4 space-y-2.5">
