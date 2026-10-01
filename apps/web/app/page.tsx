@@ -15,6 +15,8 @@ import { DownloadSection } from "@/components/download-section"
 import { FeaturesSection } from "@/components/features-section"
 import { GatewaySection } from "@/components/gateway-section"
 import { InsightsSection } from "@/components/insights-section"
+import { ProcessSection } from "@/components/process-section"
+import { TestimonialsSection } from "@/components/testimonials-section"
 import { SiteFooter } from "@/components/site-footer"
 
 const cardBase =
@@ -250,6 +252,8 @@ export default function Page() {
       <GatewaySection />
       <FeaturesSection />
       <InsightsSection />
+      <ProcessSection />
+      <TestimonialsSection />
       <DownloadSection />
       <SiteFooter />
     </main>
