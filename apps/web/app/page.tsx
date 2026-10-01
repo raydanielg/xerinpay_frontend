@@ -19,12 +19,14 @@ function FloatingCards() {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden items-end justify-center gap-5 px-8 lg:flex">
       {/* settled metric - dark */}
-      <div className={`${cardBase} mb-10 w-44 rotate-[-8deg] bg-neutral-900`}>
-        <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">
+      <div className={`${cardBase} mb-10 w-48 rotate-[-8deg] bg-neutral-900`}>
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-white/60">
           Settled today
         </p>
-        <p className="mt-1 text-xl font-bold text-white">TZS 4.2M</p>
-        <p className="mt-2 text-[11px] text-emerald-400">Airtel · M-Pesa · Tigo</p>
+        <p className="mt-1.5 text-2xl font-bold text-white">TZS 4.2M</p>
+        <p className="mt-2.5 text-xs font-medium text-emerald-400">
+          Airtel · M-Pesa · Tigo
+        </p>
       </div>
 
       {/* photo card */}
@@ -62,9 +64,9 @@ function FloatingCards() {
       </div>
 
       {/* dark copy card */}
-      <div className={`${cardBase} mb-24 w-52 rotate-[4deg] bg-neutral-900`}>
-        <span className="mb-2 block size-1.5 rounded-full bg-emerald-400" />
-        <p className="text-sm font-medium leading-snug text-white">
+      <div className={`${cardBase} mb-24 w-56 rotate-[4deg] bg-neutral-900`}>
+        <span className="mb-3 block size-1.5 rounded-full bg-emerald-400" />
+        <p className="text-sm font-medium leading-relaxed text-white">
           Orders, bookings and invoices — settled into one balance.
         </p>
       </div>
