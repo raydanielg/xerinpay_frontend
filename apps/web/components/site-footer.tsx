@@ -167,9 +167,11 @@ export function SiteFooter() {
           {/* link columns */}
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <p className="relative pb-2.5 text-xs font-semibold uppercase tracking-widest text-white/50 after:absolute after:bottom-0 after:left-0 after:h-px after:w-6 after:bg-lime-300">
-                {col.title}
-              </p>
+              <div className="border-b border-white/10 pb-2.5">
+                <p className="relative inline-block text-xs font-semibold uppercase tracking-widest text-white/50 after:absolute after:-bottom-2.5 after:left-0 after:h-0.5 after:w-5 after:rounded-full after:bg-lime-300">
+                  {col.title}
+                </p>
+              </div>
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((l) => (
                   <li key={l.label}>
