@@ -9,61 +9,88 @@ import { Button } from "@workspace/ui/components/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 
-const TIERS = [
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/v1"
+
+type Plan = {
+  name: string
+  slug: string
+  price: string
+  per: string
+  description: string
+  cta_label: string
+  cta_href: string
+  features: string[]
+  featured: boolean
+}
+
+type Fee = {
+  channel: string
+  name: string
+  percent: string
+  fixed: string
+  note: string
+}
+
+const FALLBACK_PLANS: Plan[] = [
   {
-    name: "Starter",
-    price: "Free",
-    sub: "For getting your first payments moving.",
-    cta: "Start free",
-    href: "/auth/register",
-    featured: false,
-    features: [
-      "Payment links & checkout",
-      "Mobile money + cards",
-      "Orders & bookings",
-      "Email & SMS notifications",
-      "1 business · 2 team seats",
-    ],
+    name: "Starter", slug: "starter", price: "Free", per: "",
+    description: "For getting your first payments moving.",
+    cta_label: "Start free", cta_href: "/auth/register", featured: false,
+    features: ["Payment links & checkout", "Mobile money + cards",
+               "Orders & bookings", "Email & SMS notifications",
+               "1 business · 2 team seats"],
   },
   {
-    name: "Business",
-    price: "TZS 45,000",
-    per: "/month",
-    sub: "For growing businesses that sell daily.",
-    cta: "Start with Business",
-    href: "/auth/register",
+    name: "Business", slug: "business", price: "TZS 45,000", per: "/month",
+    description: "For growing businesses that sell daily.",
+    cta_label: "Start with Business", cta_href: "/auth/register",
     featured: true,
-    features: [
-      "Everything in Starter",
-      "Invoices & subscriptions",
-      "Multi-business accounts",
-      "WhatsApp notifications",
-      "Reports & CSV exports",
-      "5 team seats · API keys",
-    ],
+    features: ["Everything in Starter", "Invoices & subscriptions",
+               "Multi-business accounts", "WhatsApp notifications",
+               "Reports & CSV exports", "5 team seats · API keys"],
   },
   {
-    name: "Enterprise",
-    price: "Talk to us",
-    sub: "Volume pricing, SLAs and dedicated support.",
-    cta: "Contact sales",
-    href: "/auth",
-    featured: false,
-    features: [
-      "Everything in Business",
-      "Custom settlement terms",
-      "Dedicated account manager",
-      "Priority support & SLA",
-      "Unlimited team seats",
-    ],
+    name: "Enterprise", slug: "enterprise", price: "Talk to us", per: "",
+    description: "Volume pricing, SLAs and dedicated support.",
+    cta_label: "Contact sales", cta_href: "/auth", featured: false,
+    features: ["Everything in Business", "Custom settlement terms",
+               "Dedicated account manager", "Priority support & SLA",
+               "Unlimited team seats"],
   },
 ]
 
+const FALLBACK_FEES: Fee[] = [
+  { channel: "mpesa", name: "M-Pesa", percent: "1.50", fixed: "0",
+    note: "Per successful collection" },
+  { channel: "airtel", name: "Airtel Money", percent: "1.50", fixed: "0",
+    note: "Per successful collection" },
+  { channel: "tigo", name: "Tigo Pesa", percent: "1.50", fixed: "0",
+    note: "Per successful collection" },
+  { channel: "card", name: "Cards (Visa / Mastercard)", percent: "2.90",
+    fixed: "300", note: "+ TZS 300 per transaction" },
+  { channel: "bank", name: "Bank transfer", percent: "0.80", fixed: "0",
+    note: "Settlement T+1" },
+  { channel: "payout", name: "Payouts to business", percent: "0.00",
+    fixed: "1000", note: "Flat TZS 1,000 per payout" },
+]
+
+async function getPricing(): Promise<{ plans: Plan[]; fees: Fee[] }> {
+  try {
+    const res = await fetch(`${API_URL}/cms/pricing`, {
+      next: { revalidate: 300 },
+    })
+    if (!res.ok) throw new Error(String(res.status))
+    const data = (await res.json()) as { plans: Plan[]; fees: Fee[] }
+    return {
+      plans: data.plans.length ? data.plans : FALLBACK_PLANS,
+      fees: data.fees.length ? data.fees : FALLBACK_FEES,
+    }
+  } catch {
+    return { plans: FALLBACK_PLANS, fees: FALLBACK_FEES }
+  }
+}
+
 const FAQS = [
-  {
-    q: "Are there transaction fees?",
-    a: "Yes — a small percentage per successful payment, depending on channel. Mobile money rates differ from cards; everything is shown before you go live.",
-  },
   {
     q: "Can I cancel anytime?",
     a: "Absolutely. Plans are monthly, no lock-in. Downgrade and keep your data — exports stay available.",
@@ -72,9 +99,15 @@ const FAQS = [
     q: "What does verification involve?",
     a: "Basic business details plus a document upload. Most accounts are verified within a day.",
   },
+  {
+    q: "Do fees differ by channel?",
+    a: "Yes — each payment channel carries its own processing rate, shown in the fee table. Everything is deducted transparently at settlement.",
+  },
 ]
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const { plans, fees } = await getPricing()
+
   return (
     <main className="min-h-svh bg-background">
       <SiteHeader />
@@ -96,11 +129,12 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* plans — served from the backend, editable in admin */}
       <section className="px-6 pb-20">
         <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
-          {TIERS.map((t) => (
+          {plans.map((t) => (
             <article
-              key={t.name}
+              key={t.slug}
               className={`relative flex flex-col rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 ${
                 t.featured
                   ? "bg-foreground text-background shadow-xl"
@@ -127,14 +161,11 @@ export default function PricingPage() {
               <p
                 className={`mt-2 text-sm ${t.featured ? "text-background/70" : "text-muted-foreground"}`}
               >
-                {t.sub}
+                {t.description}
               </p>
               <ul className="mt-6 flex-1 space-y-2.5">
                 {t.features.map((f) => (
-                  <li
-                    key={f}
-                    className="flex items-start gap-2 text-sm"
-                  >
+                  <li key={f} className="flex items-start gap-2 text-sm">
                     <HugeiconsIcon
                       icon={CheckmarkCircle02Icon}
                       strokeWidth={2}
@@ -153,14 +184,66 @@ export default function PricingPage() {
                 variant={t.featured ? "default" : "outline"}
                 nativeButton={false}
                 render={
-                  <Link href={t.href}>
-                    {t.cta}
+                  <Link href={t.cta_href}>
+                    {t.cta_label}
                     <HugeiconsIcon icon={ArrowRight01Icon} strokeWidth={2.5} />
                   </Link>
                 }
               />
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* fee table — real rates from the backend */}
+      <section className="px-6 pb-20">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold tracking-tight">
+              Transaction fees by channel
+            </h2>
+            <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+              Charged only on successful payments. The same rates power your
+              settlement reports.
+            </p>
+          </div>
+          <div className="mt-8 overflow-hidden rounded-2xl border bg-card shadow-sm">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b bg-muted/50 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <th className="px-6 py-3.5">Channel</th>
+                  <th className="px-6 py-3.5">Rate</th>
+                  <th className="hidden px-6 py-3.5 sm:table-cell">Fixed</th>
+                  <th className="hidden px-6 py-3.5 md:table-cell">Notes</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {fees.map((f) => (
+                  <tr
+                    key={f.channel}
+                    className="transition-colors hover:bg-muted/40"
+                  >
+                    <td className="px-6 py-4 font-semibold">{f.name}</td>
+                    <td className="px-6 py-4">
+                      <span className="font-bold text-emerald-600">
+                        {f.percent}%
+                      </span>
+                    </td>
+                    <td className="hidden px-6 py-4 text-muted-foreground sm:table-cell">
+                      {Number(f.fixed) > 0 ? `TZS ${f.fixed}` : "—"}
+                    </td>
+                    <td className="hidden px-6 py-4 text-muted-foreground md:table-cell">
+                      {f.note}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            Rates are published and managed by the platform — no hidden
+            markups at settlement.
+          </p>
         </div>
       </section>
 
