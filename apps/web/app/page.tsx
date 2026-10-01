@@ -155,33 +155,43 @@ export default function Page() {
 
         {/* header */}
         <header className="relative z-20 flex items-center justify-between px-6 py-5 md:px-12 md:py-7">
-          <Link href="/" className="flex items-center gap-2.5">
-            <Image
-              src="/logo.png"
-              alt="XerinPay"
-              width={34}
-              height={34}
-              className="size-9 object-contain"
-              priority
+          <div className="flex items-center gap-5">
+            <Link href="/" className="flex items-center gap-2.5">
+              <Image
+                src="/logo.png"
+                alt="XerinPay"
+                width={34}
+                height={34}
+                className="size-9 object-contain"
+                priority
+              />
+              <span className="text-lg font-semibold tracking-tight text-white">
+                XerinPay
+              </span>
+            </Link>
+            <span
+              aria-hidden
+              className="hidden h-6 w-px bg-white/25 md:block"
             />
-            <span className="text-lg font-semibold tracking-tight text-white">
-              XerinPay
-            </span>
-          </Link>
+          </div>
 
           <nav className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-widest text-white/80 md:flex">
-            <Link href="/" className="transition-colors hover:text-white">
-              Product
-            </Link>
-            <Link href="/" className="transition-colors hover:text-white">
-              Pricing
-            </Link>
-            <Link href="/" className="transition-colors hover:text-white">
-              Developers
-            </Link>
+            {["Product", "Pricing", "Developers"].map((l) => (
+              <Link
+                key={l}
+                href="/"
+                className="relative py-1 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-lime-300 after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100"
+              >
+                {l}
+              </Link>
+            ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden
+              className="hidden h-6 w-px bg-white/25 md:block"
+            />
             <Button
               variant="outline"
               className="hidden border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white md:inline-flex"
