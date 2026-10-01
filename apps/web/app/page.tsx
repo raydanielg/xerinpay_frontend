@@ -1,3 +1,6 @@
+import type { Metadata } from "next"
+import { seoMetadata } from "@/lib/seo"
+
 import Image from "next/image"
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -146,6 +149,14 @@ function FloatingCards() {
     </div>
   )
 }
+
+export const metadata: Metadata = seoMetadata({
+  title: "Payments, orders, bookings & settlements",
+  description:
+    "XerinPay lets your business accept mobile money and card payments, run orders and bookings, and track every settlement — one platform, one balance.",
+  path: "/",
+  keywords: ["payment gateway", "mobile money payments", "business payments", "Tanzania payments", "orders", "bookings", "settlements"],
+})
 
 export default function Page() {
   return (

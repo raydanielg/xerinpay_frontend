@@ -1,3 +1,6 @@
+import type { Metadata } from "next"
+import { seoMetadata } from "@/lib/seo"
+
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
@@ -56,6 +59,14 @@ const SNIPPET = `curl https://api.xerinpay.com/v1/payments \\
     "channel": "mobile_money",
     "customer": {"phone": "2557..."}
   }'`
+
+export const metadata: Metadata = seoMetadata({
+  title: "Developers — payments API, webhooks & sandbox",
+  description:
+    "Build on the XerinPay API: idempotent payments, signed webhooks, a double-entry ledger and a sandbox that behaves like production.",
+  path: "/developers",
+  keywords: ["payments API", "payment API Tanzania", "webhooks", "developer documentation", "payment integration"],
+})
 
 export default function DevelopersPage() {
   return (

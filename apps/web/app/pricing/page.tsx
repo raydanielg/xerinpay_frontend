@@ -1,3 +1,6 @@
+import type { Metadata } from "next"
+import { seoMetadata } from "@/lib/seo"
+
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
@@ -104,6 +107,24 @@ const FAQS = [
     a: "Yes — each payment channel carries its own processing rate, shown in the fee table. Everything is deducted transparently at settlement.",
   },
 ]
+
+export const metadata: Metadata = seoMetadata({
+  title: "Pricing — plans & transaction fees",
+  description:
+    "Transparent XerinPay pricing: free starter plan, business plan and per-channel transaction fees for mobile money, cards and bank transfers.",
+  path: "/pricing",
+  keywords: ["payment gateway pricing", "transaction fees", "M-Pesa fees", "business plan pricing"],
+})
+
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+}
 
 export default async function PricingPage() {
   const { plans, fees } = await getPricing()
@@ -248,6 +269,10 @@ export default async function PricingPage() {
       </section>
 
       {/* faq */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
+      />
       <section className="px-6 pb-24">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-center text-2xl font-bold tracking-tight">

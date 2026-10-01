@@ -1,3 +1,6 @@
+import type { Metadata } from "next"
+import { seoMetadata } from "@/lib/seo"
+
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
@@ -66,6 +69,14 @@ const TRUST = [
   { icon: WhatsappIcon, label: "WhatsApp notifications" },
   { icon: ApiIcon, label: "Developer API & keys" },
 ]
+
+export const metadata: Metadata = seoMetadata({
+  title: "Product — payments, orders, bookings & reports",
+  description:
+    "How XerinPay runs your whole business: payment links, checkout, orders, inventory, bookings, invoices, settlements and reports in one place.",
+  path: "/product",
+  keywords: ["payment platform", "order management", "booking system", "invoicing", "business reports"],
+})
 
 export default function ProductPage() {
   return (
